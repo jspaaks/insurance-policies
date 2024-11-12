@@ -1,0 +1,893 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$defs": {
+        "coinsuranceAfterCopay": {
+            "oneOf": [
+                {
+                    "const": "Unspecified",
+                    "type": "string"
+                },
+                {
+                    "pattern": "^[0-9]+%$",
+                    "type": "string"
+                }
+            ]
+        },
+        "copay": {
+            "additionalProperties": false,
+            "properties": {
+                "amount": {
+                    "pattern": "^\\$[0-9]+$",
+                    "type": "string"
+                },
+                "each": {
+                    "enum": [
+                        "day for the first 5 days per stay",
+                        "prescription",
+                        "stay",
+                        "test",
+                        "visit"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "amount",
+                "each"
+            ],
+            "type": "object"
+        },
+        "costModel": {
+            "additionalProperties": false,
+            "properties": {
+                "coinsuranceAfterCopay": {
+                    "$ref": "#/$defs/coinsuranceAfterCopay"
+                },
+                "copay": {
+                    "$ref": "#/$defs/copay"
+                },
+                "deductibleApplies": {
+                    "$ref": "#/$defs/deductibleApplies"
+                }
+            },
+            "required": [
+                "coinsuranceAfterCopay",
+                "copay",
+                "deductibleApplies"
+            ],
+            "type": "object"
+        },
+        "costModelDrugs": {
+            "additionalProperties": false,
+            "properties": {
+                "inNetwork": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "coinsuranceAfterCopay": {
+                            "$ref": "#/$defs/coinsuranceAfterCopay"
+                        },
+                        "copay": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "enoughFor30Days": {
+                                    "$ref": "#/$defs/copay"
+                                },
+                                "enoughFor90Days": {
+                                    "$ref": "#/$defs/copay"
+                                }
+                            },
+                            "required": [
+                                "enoughFor30Days",
+                                "enoughFor90Days"
+                            ],
+                            "type": "object"
+                        },
+                        "deductibleApplies": {
+                            "$ref": "#/$defs/deductibleApplies"
+                        }
+                    }
+                },
+                "outOfNetwork": {
+                    "oneOf": [
+                        {
+                            "const": "Not covered",
+                            "type": "string"
+                        },
+                        {
+                            "additionalProperties": false,
+                            "properties": {
+                                "coinsuranceAfterCopay": {
+                                    "$ref": "#/$defs/coinsuranceAfterCopay"
+                                },
+                                "copay": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "enoughFor30Days": {
+                                            "$ref": "#/$defs/copay"
+                                        },
+                                        "enoughFor90Days": {
+                                            "$ref": "#/$defs/copay"
+                                        }
+                                    },
+                                    "required": [
+                                        "enoughFor30Days",
+                                        "enoughFor90Days"
+                                    ],
+                                    "type": "object"
+                                },
+                                "deductibleApplies": {
+                                    "$ref": "#/$defs/deductibleApplies"
+                                }
+                            },
+                            "required": [
+                                "coinsuranceAfterCopay",
+                                "copay",
+                                "deductibleApplies"
+                            ],
+                            "type": "object"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "inNetwork",
+                "outOfNetwork"
+            ],
+            "type": "object"
+        },
+        "deductibleApplies": {
+            "oneOf": [
+                {
+                    "const": "Unspecified",
+                    "type": "string"
+                },
+                {
+                    "type": "boolean"
+                }
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "properties": {
+        "alsoCovered": {
+            "const": [
+                "Acupuncture",
+                "Chiropractic care",
+                "Infertility treatment",
+                "Private-duty nursing",
+                "Routine eye care adult"
+            ],
+            "type": "array"
+        },
+        "commonMedicalEvents": {
+            "additionalProperties": false,
+            "properties" : {
+                "hospitalStay": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "facilityFee": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        },
+                        "surgeonFee": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "facilityFee",
+                        "surgeonFee"
+                 ],
+                    "type": "object"
+                },
+                "immediateAttention": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "emergencyMedicalTransportation": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        },
+                        "emergencyRoomCare": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        },
+                        "urgentCare": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "emergencyMedicalTransportation",
+                        "emergencyRoomCare",
+                        "urgentCare"
+                 ],
+                    "type": "object"
+                },
+                "mentalHealth": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "inpatient": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        },
+                        "outpatient": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "office": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "inNetwork": {
+                                            "$ref": "#/$defs/costModel"
+                                        },
+                                        "outOfNetwork": {
+                                            "oneOf": [
+                                                {
+                                                    "const": "Not covered",
+                                                    "type": "string"
+                                                },
+                                                {
+                                                    "$ref": "#/$defs/costModel"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "inNetwork",
+                                        "outOfNetwork"
+                                    ],
+                                    "type": "object"
+                                },
+                                "other": {
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "inNetwork": {
+                                            "$ref": "#/$defs/costModel"
+                                        },
+                                        "outOfNetwork": {
+                                            "oneOf": [
+                                                {
+                                                    "const": "Not covered",
+                                                    "type": "string"
+                                                },
+                                                {
+                                                    "$ref": "#/$defs/costModel"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "inNetwork",
+                                        "outOfNetwork"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "office",
+                                "other"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "inpatient",
+                        "outpatient"
+                 ],
+                    "type": "object"
+                },
+                "outpatientSurgery": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "facilityFee": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        },
+                        "surgeonFee": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "facilityFee",
+                        "surgeonFee"
+                 ],
+                    "type": "object"
+                },
+                "prescriptionDrugs": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "nonpreferredNonspecialty": {
+                            "$ref": "#/$defs/costModelDrugs"
+                        },
+                        "nonpreferredSpecialty": {
+                            "$ref": "#/$defs/costModelDrugs"
+                        },
+                        "preferredBrand": {
+                            "$ref": "#/$defs/costModelDrugs"
+                        },
+                        "preferredGeneric": {
+                            "$ref": "#/$defs/costModelDrugs"
+                        },
+                        "preferredGenericValue": {
+                            "$ref": "#/$defs/costModelDrugs"
+                        },
+                        "preferredSpecialty": {
+                            "$ref": "#/$defs/costModelDrugs"
+                        }
+                    },
+                    "required": [
+                        "nonpreferredNonspecialty",
+                        "nonpreferredSpecialty",
+                        "preferredBrand",
+                        "preferredGeneric",
+                        "preferredGenericValue",
+                        "preferredSpecialty"
+                    ],
+                    "type": "object"
+                },
+                "providerVisit": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "nonpreventive": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        },
+                        "preventive": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        },
+                        "primaryCare": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        },
+                        "specialist": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "nonpreventive",
+                        "preventive",
+                        "primaryCare",
+                        "specialist"
+                 ],
+                    "type": "object"
+                },
+                "testing": {
+                    "additionalProperties": false,
+                    "properties": {
+                        "diagnostic": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        },
+                        "imaging": {
+                            "additionalProperties": false,
+                            "properties": {
+                                "inNetwork": {
+                                    "$ref": "#/$defs/costModel"
+                                },
+                                "outOfNetwork": {
+                                    "oneOf": [
+                                        {
+                                            "const": "Not covered",
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/$defs/costModel"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "inNetwork",
+                                "outOfNetwork"
+                            ],
+                            "type": "object"
+                        }
+                    },
+                    "required": [
+                        "diagnostic",
+                        "imaging"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "hospitalStay",
+                "immediateAttention",
+                "mentalHealth",
+                "outpatientSurgery",
+                "prescriptionDrugs",
+                "providerVisit",
+                "testing"
+            ],
+            "type": "object"
+        },
+        "deductible": {
+            "additionalProperties": false,
+            "properties": {
+                "inNetwork" : {
+                    "additionalProperties": false,
+                    "properties": {
+                        "individual": {
+                            "pattern": "^\\$[0-9]+$",
+                            "type": "string"
+                        },
+                        "family": {
+                            "pattern": "^\\$[0-9]+$",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "individual",
+                        "family"
+                    ],
+                    "type": "object"
+                },
+                "outOfNetwork" : {
+                    "additionalProperties": false,
+                    "properties": {
+                        "individual": {
+                            "pattern": "^\\$[0-9]+$",
+                            "type": "string"
+                        },
+                        "family": {
+                            "pattern": "^\\$[0-9]+$",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "individual",
+                        "family"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "inNetwork",
+                "outOfNetwork"
+            ],
+            "type": "object"
+        },
+        "meetsMinimumEssentialCoverage": {
+            "type": "boolean"
+        },
+        "meetsMinimumValueStandards": {
+            "type": "boolean"
+        },
+        "needReferralToSeeSpecialist": {
+            "const": false,
+            "type": "boolean"
+        },
+        "notCovered": {
+            "const": [
+                "Bariatric surgery",
+                "Cosmetic surgery",
+                "Dental care adult",
+                "Dental care child",
+                "Glasses child",
+                "Hearing aids",
+                "Long-term care",
+                "Non-emergency care when traveling outside the US",
+                "Routine foot care",
+                "Weight loss programs (except for required preventive)"
+            ],
+            "type": "array"
+        },
+        "notIncludedInOutOfPocketLimit": {
+            "items": {
+                "enum": [
+                    "Premiums",
+                    "Balance-billing charges",
+                    "Health care this plan doesn't cover",
+                    "Penalties to obtain pre-authorization for services"
+                ],
+                "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+        },
+        "numberOfDeductibles": {
+            "const": 1,
+            "type": "number"
+        },
+        "outOfPocketLimit": {
+            "additionalProperties": false,
+            "properties": {
+                "inNetwork" : {
+                    "additionalProperties": false,
+                    "properties": {
+                        "individual": {
+                            "pattern": "^\\$[0-9]+$",
+                            "type": "string"
+                        },
+                        "family": {
+                            "pattern": "^\\$[0-9]+$",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "individual",
+                        "family"
+                    ],
+                    "type": "object"
+                },
+                "outOfNetwork" : {
+                    "additionalProperties": false,
+                    "properties": {
+                        "individual": {
+                            "oneOf": [
+                                {
+                                    "const": "Not covered",
+                                    "type": "string"
+                                },
+                                {
+                                    "pattern": "^\\$[0-9]+$",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "family": {
+                            "oneOf": [
+                                {
+                                    "const": "Not covered",
+                                    "type": "string"
+                                },
+                                {
+                                    "pattern": "^\\$[0-9]+$",
+                                    "type": "string"
+                                }
+                            ]
+                        }
+                    },
+                    "required": [
+                        "individual",
+                        "family"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "inNetwork",
+                "outOfNetwork"
+            ],
+            "type": "object"
+        },
+        "outOfNetworkProvidersAreMoreExpensive": {
+            "const": true,
+            "type": "boolean"
+        },
+        "plan": {
+            "enum": [
+                "EPO OA 0",
+                "OAMC 0",
+                "OAMC 1500",
+                "OAMC 750",
+                "OAMC HDHP 3500/90",
+                "OOA PPO 6350 Value"
+            ],
+            "type": "string"
+        },
+        "premium": {
+            "additionalProperties": false,
+            "properties": {
+                "amount": {
+                    "pattern": "^\\$[0-9]+$",
+                    "type": "string"
+                },
+                "each": {
+                    "enum": [
+                        "month"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "amount",
+                "each"
+            ],
+            "type": "object"
+        },
+        "servicesCoveredBeforeDeductible": {
+            "items": {
+                "enum": [
+                    "Emergency care",
+                    "In-network office visits",
+                    "In-network preventive care",
+                    "In-network primary care office visits",
+                    "None",
+                    "Prescription drugs",
+                    "Preventive care"
+                ],
+                "type": "string"
+            },
+            "type": "array",
+            "uniqueItems": true
+        }
+    },
+    "required" : [
+        "alsoCovered",
+        "commonMedicalEvents",
+        "deductible",
+        "meetsMinimumEssentialCoverage",
+        "meetsMinimumValueStandards",
+        "needReferralToSeeSpecialist",
+        "notCovered",
+        "notIncludedInOutOfPocketLimit",
+        "numberOfDeductibles",
+        "outOfNetworkProvidersAreMoreExpensive",
+        "outOfPocketLimit",
+        "plan",
+        "premium",
+        "servicesCoveredBeforeDeductible"
+    ],
+    "type": "object"
+}
