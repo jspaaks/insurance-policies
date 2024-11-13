@@ -173,10 +173,6 @@
                 },
                 "outOfNetwork": "Not covered"
             },
-            "nonpreventive": {
-                "inNetwork": "Not covered",
-                "outOfNetwork": "Not covered"
-            },
             "specialist": {
                 "inNetwork": {
                     "copay": {

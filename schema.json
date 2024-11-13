@@ -307,9 +307,6 @@
                 "providerVisit": {
                     "additionalProperties": false,
                     "properties": {
-                        "nonpreventive": {
-                            "$ref": "#/$defs/costModel"
-                        },
                         "preventive": {
                             "$ref": "#/$defs/costModel"
                         },

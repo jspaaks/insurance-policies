@@ -263,10 +263,6 @@
                     "coinsurance": "50%"
                 }
             },
-            "nonpreventive": {
-                "inNetwork": "Not covered",
-                "outOfNetwork": "Not covered"
-            },
             "specialist": {
                 "inNetwork": {
                     "copay": {
