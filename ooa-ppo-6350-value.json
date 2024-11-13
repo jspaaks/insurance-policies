@@ -249,7 +249,7 @@
             }
         },
         "testing": {
-          	"diagnostic": {
+            "diagnostic": {
                 "inNetwork": {
                     "coinsurance": "0%"
                 },
