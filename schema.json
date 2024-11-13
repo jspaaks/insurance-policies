@@ -576,16 +576,11 @@
         }
     },
     "required" : [
-        "alsoCovered",
         "commonMedicalEvents",
         "deductible",
         "meetsMinimumEssentialCoverage",
         "meetsMinimumValueStandards",
-        "needReferralToSeeSpecialist",
-        "notCovered",
         "notIncludedInOutOfPocketLimit",
-        "numberOfDeductibles",
-        "outOfNetworkProvidersAreMoreExpensive",
         "outOfPocketLimit",
         "plan",
         "premium",
