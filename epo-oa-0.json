@@ -13,7 +13,7 @@
                     "coinsuranceAfterCopay": "Unspecified",
                     "copay": {
                         "amount": "$300",
-                        "each": "day for the first 5 days"
+                        "each": "day for the first 5 days per stay"
                     },
                     "deductibleApplies": "Unspecified"
                 },
@@ -86,7 +86,7 @@
                     "coinsuranceAfterCopay": "Unspecified",
                     "copay": {
                         "amount": "$300",
-                        "each": "day for the first 5 days"
+                        "each": "day for the first 5 days per stay"
                     },
                     "deductibleApplies": "Unspecified"
                 },
