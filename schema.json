@@ -18,6 +18,7 @@
                         "prescription",
                         "stay",
                         "test",
+                        "trip",
                         "visit"
                     ],
                     "type": "string"
