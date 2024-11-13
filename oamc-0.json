@@ -1,0 +1,330 @@
+{
+    "commonMedicalEvents": {
+        "hospitalStay": {
+            "facilityFee": {
+                "inNetwork": {
+                    "copay": {
+                        "amount": "$250",
+                        "each": "stay"
+                    },
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": {
+                    "coinsurance": "50%"
+                }
+            },
+            "surgeonFee": {
+                "inNetwork": "No charge",
+                "outOfNetwork": {
+                    "coinsurance": "50%"
+                }
+            }
+        },
+        "immediateAttention": {
+            "emergencyRoomCare": {
+                "inNetwork": {
+                    "copay": {
+                        "amount": "$350",
+                        "each": "visit"
+                    },
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": {
+                    "copay": {
+                        "amount": "$350",
+                        "each": "visit"
+                    },
+                    "deductibleApplies": false
+                }
+            },
+            "emergencyMedicalTransportation": {
+                "inNetwork": "No charge",
+                "outOfNetwork": "No charge"
+            },
+            "urgentCare": {
+                "inNetwork": {
+                    "copay": {
+                        "amount": "$85",
+                        "each": "visit"
+                    },
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": {
+                    "coinsurance": "50%"
+                }
+            }
+        },
+        "mentalHealth": {
+            "inpatient": {
+                "inNetwork": {
+                    "copay": {
+                        "amount": "$250",
+                        "each": "stay"
+                    },
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": {
+                    "coinsurance": "50%"
+                }
+            },
+            "outpatient": {
+                "office": {
+                    "inNetwork": {
+                        "copay": {
+                            "amount": "$40",
+                            "each": "visit"
+                        },
+                        "deductibleApplies": false
+                    },
+                    "outOfNetwork": {
+                        "coinsurance": "50%"
+                    }
+                },
+                "other": {
+                    "inNetwork": "No charge",
+                    "outOfNetwork": {
+                        "coinsurance": "50%"
+                    }
+                }
+            }
+        },
+        "prescriptionDrugs": {
+            "nonpreferredNonspecialty": {
+                "inNetwork": {
+                    "copay": {
+                        "enoughFor30Days": {
+                          "amount": "$70",
+                          "each": "prescription"
+                        },
+                        "enoughFor90Days": {
+                          "amount": "$140",
+                          "each": "prescription"
+                        }
+                    },
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": {
+                    "coinsurance": "50%",
+                    "copay": {
+                        "enoughFor30Days": {
+                          "amount": "$70",
+                          "each": "prescription"
+                        },
+                        "enoughFor90Days": {
+                          "amount": "$140",
+                          "each": "prescription"
+                        }
+                    },
+                    "deductibleApplies": false
+                }
+            },
+            "nonpreferredSpecialty": {
+                "inNetwork": {
+                    "coinsurance": "50%",
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": "Not covered"
+            },
+            "preferredBrand": {
+                "inNetwork": {
+                    "copay": {
+                        "enoughFor30Days": {
+                          "amount": "$45",
+                          "each": "prescription"
+                        },
+                        "enoughFor90Days": {
+                          "amount": "$90",
+                          "each": "prescription"
+                        }
+                    },
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": {
+                    "coinsurance": "50%",
+                    "copay": {
+                        "enoughFor30Days": {
+                          "amount": "$45",
+                          "each": "prescription"
+                        },
+                        "enoughFor90Days": {
+                          "amount": "$90",
+                          "each": "prescription"
+                        }
+                    },
+                    "deductibleApplies": false
+                }
+            },
+            "preferredGeneric": {
+                "inNetwork": {
+                    "copay": {
+                        "enoughFor30Days": {
+                          "amount": "$10",
+                          "each": "prescription"
+                        },
+                        "enoughFor90Days": {
+                          "amount": "$20",
+                          "each": "prescription"
+                        }
+                    },
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": {
+                    "coinsurance": "50%",
+                    "copay": {
+                        "enoughFor30Days": {
+                          "amount": "$10",
+                          "each": "prescription"
+                        },
+                        "enoughFor90Days": {
+                          "amount": "$20",
+                          "each": "prescription"
+                        }
+                    },
+                    "deductibleApplies": false
+                }
+            },
+            "preferredGenericValue": {
+                "inNetwork": {
+                    "copay": {
+                        "enoughFor30Days": {
+                          "amount": "$3",
+                          "each": "prescription"
+                        },
+                        "enoughFor90Days": {
+                          "amount": "$6",
+                          "each": "prescription"
+                        }
+                    },
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": {
+                    "coinsurance": "50%",
+                    "copay": {
+                        "enoughFor30Days": {
+                          "amount": "$3",
+                          "each": "prescription"
+                        },
+                        "enoughFor90Days": {
+                          "amount": "$6",
+                          "each": "prescription"
+                        }
+                    },
+                    "deductibleApplies": false
+                }
+            },
+            "preferredSpecialty": {
+                "inNetwork": {
+                    "coinsurance": "30%",
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": "Not covered"
+            }
+        },
+        "outpatientSurgery": {
+            "facilityFee": {
+                "inNetwork": {
+                    "copay": {
+                        "amount": "$100",
+                        "each": "visit"
+                    },
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": {
+                    "coinsurance": "50%"
+                }
+            },
+            "surgeonFee": {
+                "inNetwork": "No charge",
+                "outOfNetwork": {
+                    "coinsurance": "50%"
+                }
+            }
+        },
+        "providerVisit": {
+            "preventive": {
+                "inNetwork": "No charge",
+                "outOfNetwork": {
+                    "coinsurance": "50%"
+                }
+            },
+            "primaryCare": {
+                "inNetwork": {
+                    "copay": {
+                        "amount": "$20",
+                        "each": "visit"
+                    },
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": {
+                    "coinsurance": "50%"
+                }
+            },
+            "nonpreventive": {
+                "inNetwork": "Not covered",
+                "outOfNetwork": "Not covered"
+            },
+            "specialist": {
+                "inNetwork": {
+                    "copay": {
+                        "amount": "$40",
+                        "each": "visit"
+                    },
+                    "deductibleApplies": false
+                },
+                "outOfNetwork": {
+                    "coinsurance": "50%"
+                }
+            }
+        },
+        "testing": {
+          	"diagnostic": {
+                "inNetwork": "No charge",
+                "outOfNetwork": {
+                    "coinsurance": "50%"
+                }
+            },
+            "imaging": {
+                "inNetwork": "No charge",
+                "outOfNetwork": {
+                    "coinsurance": "50%"
+                }
+            }
+        }
+    },
+    "deductible": {
+        "inNetwork": {
+            "individual": "$0",
+            "family": "$0"
+        },
+        "outOfNetwork": {
+            "individual": "$300",
+            "family": "$900"
+        }
+    },
+    "meetsMinimumValueStandards": true,
+    "notIncludedInOutOfPocketLimit": [
+        "Premiums",
+        "Balance-billing charges",
+        "Healthcare this plan doesn't cover",
+        "Penalties to obtain pre-authorization for services"
+    ],
+    "outOfPocketLimit": {
+        "inNetwork": {
+            "individual": "$3000",
+            "family": "$6000"
+        },
+        "outOfNetwork": {
+            "individual": "$6000",
+            "family": "$18000"
+        }
+    },
+    "plan": "OAMC 0",
+    "premium": {
+        "amount": "$999",
+        "each": "month"
+    },
+    "servicesCoveredBeforeDeductible": [
+        "Emergency care",
+        "Prescription drugs"
+    ]
+}
