@@ -1,17 +1,9 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema",
     "$defs": {
-        "coinsuranceAfterCopay": {
-            "oneOf": [
-                {
-                    "const": "Unspecified",
-                    "type": "string"
-                },
-                {
-                    "pattern": "^[0-9]+%$",
-                    "type": "string"
-                }
-            ]
+        "coinsurance": {
+            "pattern": "^[0-9]+%$",
+                "type": "string"
         },
         "copay": {
             "additionalProperties": false,
@@ -43,14 +35,18 @@
                 "inNetwork": {
                     "oneOf": [
                         {
+                            "const": "No charge",
+                            "type": "string"
+                        },
+                        {
                             "const": "Not covered",
                             "type": "string"
                         },
                         {
                             "additionalProperties": false,
                             "properties": {
-                                "coinsuranceAfterCopay": {
-                                    "$ref": "#/$defs/coinsuranceAfterCopay"
+                                "coinsurance": {
+                                    "$ref": "#/$defs/coinsurance"
                                 },
                                 "copay": {
                                     "$ref": "#/$defs/copay"
@@ -59,11 +55,7 @@
                                     "$ref": "#/$defs/deductibleApplies"
                                 }
                             },
-                            "required": [
-                                "coinsuranceAfterCopay",
-                                "copay",
-                                "deductibleApplies"
-                            ],
+                            "required": [],
                             "type": "object"
                         }
                     ]
@@ -71,14 +63,18 @@
                 "outOfNetwork": {
                     "oneOf": [
                         {
+                            "const": "No charge",
+                            "type": "string"
+                        },
+                        {
                             "const": "Not covered",
                             "type": "string"
                         },
                         {
                             "additionalProperties": false,
                             "properties": {
-                                "coinsuranceAfterCopay": {
-                                    "$ref": "#/$defs/coinsuranceAfterCopay"
+                                "coinsurance": {
+                                    "$ref": "#/$defs/coinsurance"
                                 },
                                 "copay": {
                                     "$ref": "#/$defs/copay"
@@ -87,11 +83,7 @@
                                     "$ref": "#/$defs/deductibleApplies"
                                 }
                             },
-                            "required": [
-                                "coinsuranceAfterCopay",
-                                "copay",
-                                "deductibleApplies"
-                            ],
+                            "required": [],
                             "type": "object"
                         }
                     ]
@@ -109,8 +101,8 @@
                 "inNetwork": {
                     "additionalProperties": false,
                     "properties": {
-                        "coinsuranceAfterCopay": {
-                            "$ref": "#/$defs/coinsuranceAfterCopay"
+                        "coinsurance": {
+                            "$ref": "#/$defs/coinsurance"
                         },
                         "copay": {
                             "additionalProperties": false,
@@ -131,7 +123,9 @@
                         "deductibleApplies": {
                             "$ref": "#/$defs/deductibleApplies"
                         }
-                    }
+                    },
+                    "required": [],
+                    "type": "object"
                 },
                 "outOfNetwork": {
                     "oneOf": [
@@ -142,8 +136,8 @@
                         {
                             "additionalProperties": false,
                             "properties": {
-                                "coinsuranceAfterCopay": {
-                                    "$ref": "#/$defs/coinsuranceAfterCopay"
+                                "coinsurance": {
+                                    "$ref": "#/$defs/coinsurance"
                                 },
                                 "copay": {
                                     "additionalProperties": false,
@@ -165,11 +159,7 @@
                                     "$ref": "#/$defs/deductibleApplies"
                                 }
                             },
-                            "required": [
-                                "coinsuranceAfterCopay",
-                                "copay",
-                                "deductibleApplies"
-                            ],
+                            "required": [],
                             "type": "object"
                         }
                     ]
@@ -182,15 +172,7 @@
             "type": "object"
         },
         "deductibleApplies": {
-            "oneOf": [
-                {
-                    "const": "Unspecified",
-                    "type": "string"
-                },
-                {
-                    "type": "boolean"
-                }
-            ]
+            "type": "boolean"
         }
     },
     "additionalProperties": false,
@@ -449,7 +431,7 @@
                 "enum": [
                     "Premiums",
                     "Balance-billing charges",
-                    "Health care this plan doesn't cover",
+                    "Healthcare this plan doesn't cover",
                     "Penalties to obtain pre-authorization for services"
                 ],
                 "type": "string"
@@ -578,7 +560,6 @@
     "required" : [
         "commonMedicalEvents",
         "deductible",
-        "meetsMinimumEssentialCoverage",
         "meetsMinimumValueStandards",
         "notIncludedInOutOfPocketLimit",
         "outOfPocketLimit",
