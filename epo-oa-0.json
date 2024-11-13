@@ -184,7 +184,7 @@
             }
         },
         "testing": {
-          	"diagnostic": {
+            "diagnostic": {
                 "inNetwork": "No charge",
                 "outOfNetwork": "Not covered"
             },
@@ -211,9 +211,9 @@
     },
     "meetsMinimumValueStandards": true,
     "notIncludedInOutOfPocketLimit": [
-      "Premiums",
-      "Balance-billing charges",
-      "Healthcare this plan doesn't cover"
+        "Premiums",
+        "Balance-billing charges",
+        "Healthcare this plan doesn't cover"
     ],
     "outOfPocketLimit": {
         "inNetwork": {

@@ -3,7 +3,7 @@
         "hospitalStay": {
             "facilityFee": {
                 "inNetwork": {
-                  	"coinsurance": "30%"
+                    "coinsurance": "30%"
                 },
                 "outOfNetwork": {
                     "coinsurance": "50%"
@@ -277,7 +277,7 @@
             }
         },
         "testing": {
-          	"diagnostic": {
+            "diagnostic": {
                 "inNetwork": {
                     "coinsurance": "30%"
                 },

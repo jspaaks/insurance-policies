@@ -273,7 +273,7 @@
             }
         },
         "testing": {
-          	"diagnostic": {
+            "diagnostic": {
                 "inNetwork": "No charge",
                 "outOfNetwork": {
                     "coinsurance": "50%"
