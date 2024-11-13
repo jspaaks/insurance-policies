@@ -11,7 +11,7 @@
             },
             "surgeonFee": {
                 "inNetwork": {
-					"coinsurance": "30%"
+                 "coinsurance": "30%"
                 },
                 "outOfNetwork": {
                     "coinsurance": "50%"
