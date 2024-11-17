@@ -517,7 +517,7 @@
             ],
             "type": "string"
         },
-        "premium": {
+        "premiums": {
             "items": {
                 "additionalProperties": false,
                 "properties": {
