@@ -318,7 +318,6 @@
                         }
                     },
                     "required": [
-                        "nonpreventive",
                         "preventive",
                         "primaryCare",
                         "specialist"
@@ -519,24 +518,29 @@
             "type": "string"
         },
         "premium": {
-            "additionalProperties": false,
-            "properties": {
-                "amount": {
-                    "pattern": "^\\$[0-9]+$",
-                    "type": "string"
+            "items": {
+                "additionalProperties": false,
+                "properties": {
+                    "amount": {
+                        "pattern": "^\\$[0-9]+$",
+                        "type": "string"
+                    },
+                    "each": {
+                        "enum": [
+                            "two weeks"
+                        ],
+                        "type": "string"
+                    }
                 },
-                "each": {
-                    "enum": [
-                        "month"
-                    ],
-                    "type": "string"
-                }
+                "required": [
+                    "amount",
+                    "each"
+                ],
+                "type": "object"
             },
-            "required": [
-                "amount",
-                "each"
-            ],
-            "type": "object"
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array"
         },
         "servicesCoveredBeforeDeductible": {
             "items": {
