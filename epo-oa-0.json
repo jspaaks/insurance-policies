@@ -228,12 +228,12 @@
     "plan": "EPO OA 0",
     "premiums": [
         {
-            "amount": "$999",
-            "each": "month"
+            "amount": "$162.74",
+            "each": "two weeks"
         },
         {
-            "amount": "$999",
-            "each": "month"
+            "amount": "$557.91",
+            "each": "two weeks"
         }
     ],
     "servicesCoveredBeforeDeductible": [

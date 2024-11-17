@@ -285,12 +285,12 @@
     "plan": "OAMC HDHP 3500/90",
     "premiums": [
         {
-            "amount": "$999",
-            "each": "month"
+            "amount": "$16.10",
+            "each": "two weeks"
         },
         {
-            "amount": "$999",
-            "each": "month"
+            "amount": "$234.92",
+            "each": "two weeks"
         }
     ],
     "servicesCoveredBeforeDeductible": [

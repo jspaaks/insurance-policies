@@ -297,12 +297,12 @@
     "plan": "OOA PPO 6350 Value",
     "premiums": [
         {
-            "amount": "$999",
-            "each": "month"
+            "amount": "$0.50",
+            "each": "two weeks"
         },
         {
-            "amount": "$999",
-            "each": "month"
+            "amount": "$200.55",
+            "each": "two weeks"
         }
     ],
     "servicesCoveredBeforeDeductible": [

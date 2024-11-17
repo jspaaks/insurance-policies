@@ -317,12 +317,12 @@
     "plan": "OAMC 0",
     "premiums": [
         {
-            "amount": "$999",
-            "each": "month"
+            "amount": "$238.42",
+            "each": "two weeks"
         },
         {
-            "amount": "$999",
-            "each": "month"
+            "amount": "$724.58",
+            "each": "two weeks"
         }
     ],
     "servicesCoveredBeforeDeductible": [
