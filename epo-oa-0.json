@@ -226,10 +226,16 @@
         }
     },
     "plan": "EPO OA 0",
-    "premium": {
-        "amount": "$999",
-        "each": "month"
-    },
+    "premiums": [
+        {
+            "amount": "$999",
+            "each": "month"
+        },
+        {
+            "amount": "$999",
+            "each": "month"
+        }
+    ],
     "servicesCoveredBeforeDeductible": [
         "None"
     ]

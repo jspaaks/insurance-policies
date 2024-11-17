@@ -283,10 +283,16 @@
         }
     },
     "plan": "OAMC HDHP 3500/90",
-    "premium": {
-        "amount": "$999",
-        "each": "month"
-    },
+    "premiums": [
+        {
+            "amount": "$999",
+            "each": "month"
+        },
+        {
+            "amount": "$999",
+            "each": "month"
+        }
+    ],
     "servicesCoveredBeforeDeductible": [
         "In-network preventive care"
     ]

@@ -295,10 +295,16 @@
         }
     },
     "plan": "OOA PPO 6350 Value",
-    "premium": {
-        "amount": "$999",
-        "each": "month"
-    },
+    "premiums": [
+        {
+            "amount": "$999",
+            "each": "month"
+        },
+        {
+            "amount": "$999",
+            "each": "month"
+        }
+    ],
     "servicesCoveredBeforeDeductible": [
         "Prescription drugs",
         "In-network primary care office visits",
